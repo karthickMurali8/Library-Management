@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.center-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fd-column {
+    flex-direction: column;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.form-container {
+    background-color: #f6f8fa;
+    padding: 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid hsla(210,18%,87%,1);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+
+// Material UI global Stlyes
+
+.mdc-text-field--outlined .mat-mdc-form-field-infix, .mdc-text-field--no-label .mat-mdc-form-field-infix {
+    padding: 1.25rem 0;
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: #FFFFFF;
+}
+
+.mat-mdc-raised-button {
+    --mdc-protected-button-container-color: #1f883d;
+    --mdc-protected-button-label-text-color: white;
+    width: 100%;
+}
