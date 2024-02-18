@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +19,14 @@ export class LoginComponent {
   action: string = 'Sign In';
 
   constructor (
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
 
   enterApp() {
     if (this.isSignUp) {
-      this.router.navigate(['../login']);
+      this.router.navigate(['login'], { relativeTo: this.route });
     } else {
       this.router.navigate(['app/library']);
     }

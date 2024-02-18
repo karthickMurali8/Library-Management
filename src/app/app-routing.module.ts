@@ -11,10 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./library/library.module').then(m => m.LibraryModule)
   },
   
-  // {
-  //   path: '**',
-  //   redirectTo: 'common'
-  // }
+  {
+    path: '**',
+    redirectTo: 'common'
+  }
 ];
 
 @NgModule({

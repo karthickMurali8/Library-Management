@@ -1,0 +1,24 @@
+.base-container {
+    height: 100dvh;
+
+    mat-drawer {
+        background-color: darkslateblue;
+        color: white;
+
+        .navigation-wrapper {
+            width: 250px;
+    
+            .nav-header {
+                height: 50px;
+            }
+    
+            .nav-header, .nav-content {
+                padding: 20px;
+            }
+
+            .activePath {
+                background-color: white;
+            }
+        }
+    }
+}
