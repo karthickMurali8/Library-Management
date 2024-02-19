@@ -12,7 +12,7 @@ export class CustomerInfoComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ['name', 'price', 'action'];
+  displayedColumns: string[] = ['name', 'price', 'date', 'action'];
   dataSource = new MatTableDataSource(
     [
       {
@@ -20,7 +20,8 @@ export class CustomerInfoComponent implements AfterViewInit {
         name: 'Game Of Thrones',
         description: 'Fantasy & Historical',
         price: '$80',
-        isBorrowed: true
+        isBorrowed: true,
+        date: new Date()
       }
     ]
   )
