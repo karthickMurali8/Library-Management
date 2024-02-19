@@ -18,6 +18,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
 }
 
+h3 {
+    margin: 0 !important;
+}
+
 .form-container {
     background-color: #f6f8fa;
     padding: 16px;

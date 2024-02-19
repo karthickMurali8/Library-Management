@@ -12,13 +12,27 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import { AddEditBookComponent } from './add-edit-book/add-edit-book.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MyBooksComponent } from './my-books/my-books.component';
+import { CustomersComponent } from './customers/customers.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import {MatSelectModule} from '@angular/material/select';
+import { CustomerInfoComponent } from './customer-info/customer-info.component';
 
 
 @NgModule({
   declarations: [
     LibraryComponent,
     UserAccountComponent,
-    AppBaseComponent
+    AppBaseComponent,
+    AddEditBookComponent,
+    MyBooksComponent,
+    CustomersComponent,
+    EditProfileComponent,
+    CustomerInfoComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +43,11 @@ import {MatTableModule} from '@angular/material/table';
     MatToolbarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class LibraryModule { }

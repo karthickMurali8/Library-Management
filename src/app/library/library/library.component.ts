@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
+import { AddEditBookComponent } from '../add-edit-book/add-edit-book.component';
 
 @Component({
   selector: 'app-library',
@@ -24,14 +26,36 @@ export class LibraryComponent implements AfterViewInit {
     ]
   )
 
+  constructor (
+    private dialog: MatDialog
+  ) {}
+
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  editBook(id: Number) {}
+  editBook(id: Number) {
+    const modalRef = this.dialog.open(AddEditBookComponent, {
+      width: '500px',
+      data: {
+        action: 'Edit Book',
+        id: 0
+      },
+    });
+  }
 
   borrowBook(id: Number) {}
+
+  addBook() {
+    const dialogRef = this.dialog.open(AddEditBookComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog closed with result:', result);
+    });
+  }
 
 }

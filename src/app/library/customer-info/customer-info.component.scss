@@ -1,0 +1,17 @@
+:host {
+    height: calc(100dvh - 112px);
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    gap: 20px;
+
+    .container {
+        border: 1px solid lightgray;
+        border-radius: 12px;
+        padding: 16px;
+        background-color: white;
+    }
+
+    .row {
+        margin-bottom: 45px;
+    }
+}

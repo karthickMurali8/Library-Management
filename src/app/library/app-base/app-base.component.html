@@ -7,6 +7,12 @@
                 <p routerLinkActive="activePath">
                     <a [routerLink]="['library']">Library</a>
                 </p>
+                <p routerLinkActive="activePath">
+                    <a [routerLink]="['myBooks']">My Books</a>
+                </p>
+                <p routerLinkActive="activePath">
+                    <a [routerLink]="['customers']">Customers</a>
+                </p>
             </div>
         </div>
     </mat-drawer>
@@ -16,7 +22,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <span>LibHub</span>
-            <button mat-icon-button class="example-icon favorite-icon ml-auto" aria-label="Example icon-button with heart icon">
+            <button mat-icon-button class="example-icon favorite-icon ml-auto" aria-label="Example icon-button with heart icon" (click)="editProfile()">
                 <mat-icon>person</mat-icon>
             </button>
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">

@@ -1,0 +1,58 @@
+<div class="customer-info-container container">
+    <div class="row">
+        <h3>Customer Name</h3>
+        <p>Jon Snow</p>
+    </div>
+    <div class="row">
+        <h3>Contact No.</h3>
+        <p>9484948393</p>
+    </div>
+    <div class="row">
+        <h3>No. of Books borrowed</h3>
+        <p>1</p>
+    </div>
+    <div class="row">
+        <h3>Books borrowed</h3>
+        <p>GOT</p>
+    </div>
+</div>
+<div class="transactions container">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+    
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-raised-button color="primary">
+                        <mat-icon>logout</mat-icon>
+                        Borrowed
+                    </button>
+                    <button mat-raised-button color="accent">
+                        <mat-icon>login</mat-icon>
+                        Returned
+                    </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data</td>
+            </tr>
+        </table>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+</div>
