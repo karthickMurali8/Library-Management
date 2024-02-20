@@ -7,10 +7,10 @@
                 <p routerLinkActive="activePath">
                     <a [routerLink]="['library']">Library</a>
                 </p>
-                <p routerLinkActive="activePath">
+                <p routerLinkActive="activePath" *ngIf="!isAdmin">
                     <a [routerLink]="['myBooks']">My Books</a>
                 </p>
-                <p routerLinkActive="activePath">
+                <p routerLinkActive="activePath" *ngIf="isAdmin">
                     <a [routerLink]="['customers']">Customers</a>
                 </p>
             </div>

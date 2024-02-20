@@ -25,12 +25,15 @@ export class LibraryComponent implements AfterViewInit {
         price: '$40'
       }
     ]
-  )
+  );
+  isAdmin: boolean;
 
   constructor (
     private dialog: MatDialog,
     private httpService: HttpService
-  ) {}
+  ) {
+    this.isAdmin = this.httpService.isAdmin;
+  }
 
 
   ngAfterViewInit(): void {

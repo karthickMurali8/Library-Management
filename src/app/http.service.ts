@@ -32,7 +32,7 @@ export class HttpService {
       next: (res: any) => {
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
-        this.isAdmin = res?.user?.isAdmin;
+        this.isAdmin = JSON.parse(res?.user?.isAdmin);
         this.router.navigate(['app/library']);
       },
       error: (err) => { console.log(err) }

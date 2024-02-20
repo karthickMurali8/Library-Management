@@ -9,11 +9,14 @@ import { HttpService } from 'src/app/http.service';
   styleUrls: ['./app-base.component.scss']
 })
 export class AppBaseComponent {
+  isAdmin: boolean;
 
   constructor (
     private dialog: MatDialog,
     private httpService: HttpService
-  ) {}
+  ) {
+    this.isAdmin = this.httpService.isAdmin;
+  }
 
   editProfile() {
     this.dialog.open(EditProfileComponent, { width: '500px' });

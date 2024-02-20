@@ -24,11 +24,9 @@ export class ApiInterceptor implements HttpInterceptor {
     }
 
     return next.handle(req).pipe(catchError(res => {
-        // if (res instanceof HttpErrorResponse) {
-        // }
-        // console.log(res);
         this.toaster.error(res.error.message);
-        // this.router.navigate(['common/login']);
+        localStorage.clear();
+        this.router.navigate(['common/login']);
         return of(res);
     }));
   }

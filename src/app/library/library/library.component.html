@@ -1,4 +1,4 @@
-<button mat-raised-button color="primary" (click)="addBook()" class="add-book-btn">
+<button mat-raised-button color="primary" (click)="addBook()" class="add-book-btn" *ngIf="isAdmin">
     <mat-icon>add_box</mat-icon>
     Add Book
 </button>
@@ -23,11 +23,11 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
         <td mat-cell *matCellDef="let row">
-            <button mat-raised-button color="primary" (click)="editBook(row)">
+            <button mat-raised-button color="primary" (click)="editBook(row)" *ngIf="isAdmin">
                 <mat-icon>edit</mat-icon>
                 Edit
             </button>
-            <button mat-raised-button color="primary" (click)="borrowBook(row.id)">
+            <button mat-raised-button color="primary" (click)="borrowBook(row.id)" *ngIf="!isAdmin">
                 <mat-icon>playlist_add</mat-icon>
                 Borrow
             </button>
