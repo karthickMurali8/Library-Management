@@ -4,6 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import { AddEditBookComponent } from '../add-edit-book/add-edit-book.component';
+import { HttpService } from 'src/app/http.service';
 
 @Component({
   selector: 'app-library',
@@ -19,30 +20,38 @@ export class LibraryComponent implements AfterViewInit {
     [
       {
         id: 1,
-        name: 'Game Of Thrones',
-        description: 'Fantasy & Historical',
-        price: '$80'
+        name: 'Stranger Things',
+        description: 'Sci-Fi',
+        price: '$40'
       }
     ]
   )
 
   constructor (
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private httpService: HttpService
   ) {}
 
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.getAllBooks();
   }
 
-  editBook(id: Number) {
-    const modalRef = this.dialog.open(AddEditBookComponent, {
+  editBook(book: Object) {
+    const dialogRef = this.dialog.open(AddEditBookComponent, {
       width: '500px',
       data: {
         action: 'Edit Book',
-        id: 0
+        book: JSON.parse(JSON.stringify(book))
       },
+    });
+
+    dialogRef.afterClosed().subscribe((book) => {
+      if (book) {
+        this.updateBook(book, book.id);
+      }
     });
   }
 
@@ -53,8 +62,31 @@ export class LibraryComponent implements AfterViewInit {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed with result:', result);
+    dialogRef.afterClosed().subscribe((book) => {
+      if (book) {
+        this.createBook(book);
+      }
+    });
+  }
+
+  createBook(book: Object) {
+    this.httpService.createBook(book).subscribe({
+      next: (res) => { this.getAllBooks() },
+      error: (err) => { console.log(err) }
+    });
+  }
+
+  updateBook(book: Object, id: Number) {
+    this.httpService.updateBook(book, id).subscribe({
+      next: (res) => { this.getAllBooks() },
+      error: (err) => { console.log(err) }
+    });
+  }
+
+  getAllBooks() {
+    this.httpService.getBooks().subscribe({
+      next: (res: any) => { this.dataSource = new MatTableDataSource(res) },
+      error: (err) => { console.log(err) }
     });
   }
 

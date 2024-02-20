@@ -21,6 +21,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {MatSelectModule} from '@angular/material/select';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class LibraryModule { }

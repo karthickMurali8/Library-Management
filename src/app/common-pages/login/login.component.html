@@ -9,35 +9,37 @@
     <h1>{{ action }} to LibHub</h1>
     <div class="actions-container">
         <div class="form-container">
-            <p>
-                <!-- <label>Username</label>
-                <input> -->
-                <mat-form-field appearance="outline">
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="Enter Your Name">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                    <!-- <mat-hint>Hint</mat-hint> -->
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput [type]="hidePassword ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-                    </button>
-                </mat-form-field>
-            </p>
-            <p *ngIf="isSignUp">
-                <mat-form-field appearance="outline" class="w-100" heigh>
-                    <mat-label>User Type</mat-label>
-                    <mat-select disableRipple>
-                      <mat-option value="1">User</mat-option>
-                      <mat-option value="2">Admin</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </p>
-            <button mat-raised-button color="primary" (click)="enterApp()">{{ action }}</button>
+            <form [formGroup]="signupForm">
+                <p>
+                    <!-- <label>Username</label>
+                    <input> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Enter Your Name" formControlName="username">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </p>
+                <p *ngIf="isSignUp">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>User Type</mat-label>
+                        <mat-select disableRipple formControlName="isAdmin">
+                          <mat-option value="false">User</mat-option>
+                          <mat-option value="true">Admin</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+            </form>
+            <button mat-raised-button color="primary" (click)="enterApp()" [disabled]="signupForm.invalid">{{ action }}</button>
         </div>
         <div class="form-container redirect-container mt-16" *ngIf="!isSignUp">
             <p class="ta-center">

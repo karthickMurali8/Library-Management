@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { appGuard } from './route-guards/app.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    loadChildren: () => import('./library/library.module').then(m => m.LibraryModule)
+    loadChildren: () => import('./library/library.module').then(m => m.LibraryModule),
+    canActivate: [appGuard]
   },
   
   {

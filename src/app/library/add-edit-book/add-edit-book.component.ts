@@ -8,12 +8,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class AddEditBookComponent {
   action: string;
+  bookData = {
+    name: '',
+    description: '',
+    price: ''
+  }
 
   constructor(
     public dialogRef: MatDialogRef<AddEditBookComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.action = data?.action ?? 'Add Book';
+    this.bookData = data?.book ?? this.bookData;
   }
 
   closeDialog(): void {

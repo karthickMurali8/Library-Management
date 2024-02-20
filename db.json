@@ -1,0 +1,22 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "name": "Game Of Thrones 4",
+      "description": "Fantasy & Historical",
+      "price": "$108"
+    },
+    {
+      "id": "2",
+      "name": "Harry Potter",
+      "description": "Fantasy",
+      "price": "$90"
+    },
+    {
+      "id": "7516",
+      "name": "The Martian",
+      "description": "Sci-Fi",
+      "price": "$76"
+    }
+  ]
+}
