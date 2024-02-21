@@ -24,14 +24,18 @@ export class CustomerInfoComponent implements AfterViewInit {
         date: new Date()
       }
     ]
-  )
+  );
+  customer;
 
   constructor (
-  ) {}
+  ) {
+    this.customer = JSON.parse(localStorage.getItem('customer') || '');
+  }
 
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.data = this.customer.transactions;
   }
 }

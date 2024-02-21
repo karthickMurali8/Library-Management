@@ -1,22 +1,24 @@
 <h2 mat-dialog-title>Update Profile</h2>
 <mat-dialog-content class="mat-typography">
-    <p>
-        <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Enter Your Name">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
-        </mat-form-field>
-    </p>
-    <p>
+    <form [formGroup]="userForm">
+        <p>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Enter Your Name" formControlName="username">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </mat-form-field>
+        </p>
+    </form>
+    <!-- <p>
         <mat-form-field appearance="outline" class="w-100" heigh>
             <mat-label>User Type</mat-label>
             <mat-select disableRipple>
@@ -24,9 +26,9 @@
               <mat-option value="2">Admin</mat-option>
             </mat-select>
         </mat-form-field>
-    </p>
+    </p> -->
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="userForm.value" cdkFocusInitial [disabled]="userForm.invalid">Save</button>
 </mat-dialog-actions>

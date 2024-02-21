@@ -58,7 +58,11 @@ export class LibraryComponent implements AfterViewInit {
     });
   }
 
-  borrowBook(id: Number) {}
+  borrowBook(book: any) {
+    this.httpService.borrow(book).subscribe({
+      next: (res) => {  }
+    });
+  }
 
   addBook() {
     const dialogRef = this.dialog.open(AddEditBookComponent, {

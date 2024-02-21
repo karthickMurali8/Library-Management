@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -7,18 +8,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileComponent {
-  user;
   hidePassword: boolean = true;
+  userForm;
 
   constructor(
-    public dialogRef: MatDialogRef<EditProfileComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.user = data?.user;
-  }
-
-  closeDialog(): void {
-    this.dialogRef.close();
+    const user = JSON.parse(localStorage.getItem('user') || '');
+    this.userForm = new FormGroup({
+      username: new FormControl(user.username, [Validators.required]),
+      password: new FormControl(user.password, [Validators.required])
+    });
   }
 
 }

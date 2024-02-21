@@ -19,11 +19,20 @@ export class AppBaseComponent {
   }
 
   editProfile() {
-    this.dialog.open(EditProfileComponent, { width: '500px' });
+    const modalRef = this.dialog.open(EditProfileComponent, { width: '500px' });
+    modalRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.updateUser(res);
+      }
+    });
   }
 
   logout() {
     this.httpService.logOut();
+  }
+
+  updateUser(user: {username: string, password: string}) {
+    this.httpService.updateUser(user);
   }
 
 }

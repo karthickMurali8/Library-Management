@@ -27,7 +27,7 @@
                 <mat-icon>edit</mat-icon>
                 Edit
             </button>
-            <button mat-raised-button color="primary" (click)="borrowBook(row.id)" *ngIf="!isAdmin">
+            <button mat-raised-button color="primary" (click)="borrowBook(row)" *ngIf="!isAdmin">
                 <mat-icon>playlist_add</mat-icon>
                 Borrow
             </button>
