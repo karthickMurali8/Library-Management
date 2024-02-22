@@ -5,6 +5,7 @@ import { AppBaseComponent } from './app-base/app-base.component';
 import { MyBooksComponent } from './my-books/my-books.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
+import { canAuthorise } from '../route-guards/canAuthorise.guard';
 
 const routes: Routes = [
   {
@@ -17,15 +18,18 @@ const routes: Routes = [
       },
       {
         path: 'myBooks',
-        component: MyBooksComponent
+        component: MyBooksComponent,
+        canActivate: [canAuthorise]
       },
       {
         path: 'customers',
-        component: CustomersComponent
+        component: CustomersComponent,
+        canActivate: [canAuthorise]
       },
       {
         path: 'customers/:id',
-        component: CustomerInfoComponent
+        component: CustomerInfoComponent,
+        canActivate: [canAuthorise]
       },
 
       {
