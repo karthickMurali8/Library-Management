@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import { AddEditBookComponent } from '../add-edit-book/add-edit-book.component';
 import { HttpService } from 'src/app/http.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-library',
@@ -30,15 +31,14 @@ export class LibraryComponent implements AfterViewInit {
 
   constructor (
     private dialog: MatDialog,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private toaster: ToastrService
   ) {
     this.isAdmin = this.httpService.isAdmin;
   }
 
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.getAllBooks();
   }
 
@@ -60,7 +60,7 @@ export class LibraryComponent implements AfterViewInit {
 
   borrowBook(book: any) {
     this.httpService.borrow(book).subscribe({
-      next: (res) => {  }
+      next: (res) => { this.toaster.success('Book Successfully Borrowed !'); }
     });
   }
 
@@ -78,21 +78,31 @@ export class LibraryComponent implements AfterViewInit {
 
   createBook(book: Object) {
     this.httpService.createBook(book).subscribe({
-      next: (res) => { this.getAllBooks() },
+      next: (res) => {
+        this.toaster.success('Book Added successfully !');
+        this.getAllBooks();
+      },
       error: (err) => { console.log(err) }
     });
   }
 
   updateBook(book: Object, id: Number) {
     this.httpService.updateBook(book, id).subscribe({
-      next: (res) => { this.getAllBooks() },
+      next: (res) => {
+        this.toaster.success('Book Updated successfully !');
+        this.getAllBooks();
+      },
       error: (err) => { console.log(err) }
     });
   }
 
   getAllBooks() {
     this.httpService.getBooks().subscribe({
-      next: (res: any) => { this.dataSource = new MatTableDataSource(res) },
+      next: (res: any) => { 
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
       error: (err) => { console.log(err) }
     });
   }

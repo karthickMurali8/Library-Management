@@ -34,8 +34,8 @@ export class CustomerInfoComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
+    this.dataSource = new MatTableDataSource(this.customer.transactions);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.data = this.customer.transactions;
   }
 }

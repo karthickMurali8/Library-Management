@@ -23,6 +23,10 @@ export class ApiInterceptor implements HttpInterceptor {
         req = req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`)});
     }
 
+    // if (req.body?.password) {
+    //   req.body.password = this.transform.encryptData(req.body.password);
+    // }
+
     return next.handle(req).pipe(catchError(res => {
         this.toaster.error(res.error.message);
         localStorage.clear();

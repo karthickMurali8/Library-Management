@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,14 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toaster: ToastrService
   ) { }
 
   signUp(body: any) {
     this.http.post(`${this.serverURL}/auth/register`, body).subscribe({
       next: (res) => { 
+        this.toaster.success('Successfully Registered');
         this.router.navigate(['login'], { relativeTo: this.route });
       },
       error: (err) => { 
@@ -33,6 +36,7 @@ export class HttpService {
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
         this.isAdmin = JSON.parse(res?.user?.isAdmin);
+        this.toaster.success('Successfully Logged In');
         this.router.navigate(['app/library']);
       },
       error: (err) => { console.log(err) }
@@ -90,6 +94,6 @@ export class HttpService {
     user.username = userInfo.username;
     user.password = userInfo.password;
     localStorage.setItem('user', JSON.stringify(user));
-    this.http.put(`${this.serverURL}/users/${user.id}`, user).subscribe(res => {});
+    this.http.put(`${this.serverURL}/users/${user.id}`, user).subscribe(res => { this.toaster.success('Profile Successfully Updated !') });
   }
 }

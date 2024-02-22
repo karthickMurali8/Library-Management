@@ -33,8 +33,6 @@ export class CustomersComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.getUsers();
   }
 
@@ -42,6 +40,8 @@ export class CustomersComponent implements AfterViewInit {
     this.httpService.getAllUsers().subscribe((res: any) => {
       const normalUsers = res.filter((user:any) => !JSON.parse(user.isAdmin));
       this.dataSource = new MatTableDataSource(normalUsers);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 

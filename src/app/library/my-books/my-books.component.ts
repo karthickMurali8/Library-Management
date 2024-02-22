@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/http.service';
 
 @Component({
@@ -27,13 +28,12 @@ export class MyBooksComponent implements AfterViewInit {
   selectedId : any;
 
   constructor (
-    private httpService: HttpService
+    private httpService: HttpService,
+    private toaster: ToastrService
   ) {}
 
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.getMyBooks();
   }
 
@@ -46,12 +46,15 @@ export class MyBooksComponent implements AfterViewInit {
       }
       data = res.borrowedBooks;
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
   returnBook(id: string) {
     this.selectedId = id;
     this.httpService.removeMyBook(id).subscribe((res: any) => {
+      this.toaster.success('Book Successfully returned to Library.');
       this.getMyBooks();
     });
   }
