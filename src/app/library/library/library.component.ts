@@ -28,13 +28,14 @@ export class LibraryComponent implements AfterViewInit {
     ]
   );
   isAdmin: boolean;
+  allBooks: any;
 
   constructor (
     private dialog: MatDialog,
     private httpService: HttpService,
     private toaster: ToastrService
   ) {
-    this.isAdmin = this.httpService.isAdmin;
+    this.isAdmin = JSON.parse(JSON.parse(localStorage.getItem('user') || '')?.isAdmin);
   }
 
 
@@ -60,7 +61,13 @@ export class LibraryComponent implements AfterViewInit {
 
   borrowBook(book: any) {
     this.httpService.borrow(book).subscribe({
-      next: (res) => { this.toaster.success('Book Successfully Borrowed !'); }
+      next: (res) => {
+        this.toaster.success('Book Successfully Borrowed !'); 
+        const user = JSON.parse(localStorage.getItem('user') || '');
+        user?.borrowedBooks?.push(book);
+        localStorage.setItem('user', JSON.stringify(user));
+        this.updateBooksShown();
+      }
     });
   }
 
@@ -98,13 +105,25 @@ export class LibraryComponent implements AfterViewInit {
 
   getAllBooks() {
     this.httpService.getBooks().subscribe({
-      next: (res: any) => { 
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+      next: (res: any) => {
+        this.allBooks = res;
+        this.updateBooksShown();
       },
       error: (err) => { console.log(err) }
     });
   }
 
+  updateBooksShown() {
+    const borrowed = JSON.parse(localStorage.getItem('user') || '')?.borrowedBooks;
+    let books;
+    if (this.allBooks?.length) {
+      books = this.allBooks.filter((a : any) => borrowed.findIndex((b : any) => b.id == a.id) === -1);
+    } else {
+      books = [];
+    }
+    this.dataSource = new MatTableDataSource(books);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+ 
 }

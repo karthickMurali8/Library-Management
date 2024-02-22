@@ -15,7 +15,7 @@ export class AppBaseComponent {
     private dialog: MatDialog,
     private httpService: HttpService
   ) {
-    this.isAdmin = this.httpService.isAdmin;
+    this.isAdmin = JSON.parse(JSON.parse(localStorage.getItem('user') || '')?.isAdmin);
   }
 
   editProfile() {

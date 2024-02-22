@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HttpService {
   serverURL = 'http://localhost:3000';
-  isAdmin: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -35,7 +34,6 @@ export class HttpService {
       next: (res: any) => {
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
-        this.isAdmin = JSON.parse(res?.user?.isAdmin);
         this.toaster.success('Successfully Logged In');
         this.router.navigate(['app/library']);
       },

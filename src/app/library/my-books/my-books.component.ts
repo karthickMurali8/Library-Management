@@ -55,6 +55,13 @@ export class MyBooksComponent implements AfterViewInit {
     this.selectedId = id;
     this.httpService.removeMyBook(id).subscribe((res: any) => {
       this.toaster.success('Book Successfully returned to Library.');
+      const user = JSON.parse(localStorage.getItem('user') || '');
+      if (user?.borrowedBooks?.length) {
+        user.borrowedBooks.splice(
+          user.borrowedBooks.findIndex((book : any) => book.id == id)
+        , 1);
+        localStorage.setItem('user', JSON.stringify(user));
+      }
       this.getMyBooks();
     });
   }
